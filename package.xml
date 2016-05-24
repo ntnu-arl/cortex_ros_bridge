@@ -8,7 +8,7 @@
 
   <license>GNU General Public License, Version 3.0</license>
 
-  <url type="website">http://wiki.ros.org/cortex_bridge</url>
+  <url type="website">https://github.com/unr-arl/cortex_ros_bridge</url>
 
   <author email="tcsorey@gmail.com">Tyler Sorey</author>
 
