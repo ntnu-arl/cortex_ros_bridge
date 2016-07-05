@@ -254,7 +254,7 @@ void newFrameCallback(sFrameOfData* FrameOfData)
 	}
 
 	// publish markers
-#ifdef PUBLISH_VISUALIZATION_MARKERS_TYLER
+#ifdef PUBLISH_VISUALIZATION_MARKER
 	visualization_msgs::MarkerArray marker_array;
 	marker_array = CreateMarkerArray_vis ( FrameOfData );
 	Cortex_markers.publish(marker_array);
