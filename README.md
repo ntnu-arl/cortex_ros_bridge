@@ -20,14 +20,19 @@ and change the default port number to something memorbale (we used 1025).
 </code></pre>
 and again change the default port number to something memorable (we used 1026).
 
-Once you have made those changes you will need to make some changes within Cortex itself. Go to the Windows machine that is running Cortex and go to *Tools -> Settings* then navigate to the *System* tab. In this tab you will see a SDK Streaming section. You will need to check the fillowing settings in that section:
+Once all the above changes have been made you will need to put these files into your project, specifically:
+
+1. Place the header files in the *include/ folder.
+2. Place the source files in the *src/ folder.
+
+Once you have that taken care of you will need to make some changes within Cortex itself. Go to the Windows machine that is running Cortex and go to *Tools -> Settings* then navigate to the *System* tab. In this tab you will see a SDK Streaming section. You will need to check the fillowing settings in that section:
 
 1. SDK2 Enabled is checked.
 2. The NIC Address is the external address of the windows computer itself (not *127.0.0.1*).
 3. The General Request Port has the same port number as you entered for the "wCortexPort" variable in the cortex.cpp file.
 4. The Data Multicast Port has the same port number as you entered for the "wMulticastPort" variable in the cortex.cpp file.
 
-Also, this should go without saying but the computers should be able to see eachother on the network (i.e. ping eachother). This has not been tested using WiFi, only ethernet connected computers. 
+Also, this should go without saying, but the computers should be able to see eachother on the network (i.e. ping eachother). This has not been tested using WiFi, only ethernet connected computers. 
 
 # Usage
 

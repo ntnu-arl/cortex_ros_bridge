@@ -45,9 +45,3 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(cortex_bridge src/cortex_bridge.cpp src/cortex.cpp src/cortex_socket.cpp 								src/cortex_unpack.cpp src/m3x3.cpp src/CortexHandler.cpp src/MarkerHandler.cpp src/TransformHandler.cpp)
 target_link_libraries(cortex_bridge ${catkin_LIBRARIES})
 add_dependencies(cortex_bridge cortex_bridge_generate_messages_cpp)
-
-add_executable(temp_controller src/temp_controller.cpp)
-target_link_libraries(temp_controller ${catkin_LIBRARIES})
-
-add_executable(pid_controller src/pid_controller.cpp)
-target_link_libraries(pid_controller ${catkin_LIBRARIES})
