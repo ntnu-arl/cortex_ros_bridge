@@ -1,5 +1,5 @@
 /*
-		Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
+	Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
 
     This file is part of cortex_bridge.
 
@@ -29,7 +29,7 @@ std::tuple<bool, StampedTransform> CreateTransform ( sFrameOfData* FrameOfData, 
 {
 	// initialize variables
 	double pos_x, pos_y, pos_z, roll, pitch, yaw;
-  int numSegments;
+	int numSegments;
 	bool valid_data = true;
 	ros::Time tf_stamp;
 	StampedTransform transform;
@@ -50,9 +50,9 @@ std::tuple<bool, StampedTransform> CreateTransform ( sFrameOfData* FrameOfData, 
 			yaw = (piDiv180)*Segments[i][5]; // yaw (in rad)
 
 			// assure body data is valid
-			if ( ( pos_x < -2 || pos_x > 2 ) ||
-						( pos_y < -1.25 || pos_y > 1.25 ) ||
-						 ( pos_z < 0 || pos_z > 1.75 ) )
+			if ( ( pos_x < -2 || pos_x > 2 ) ||        // values currently hard coded for the 
+				 ( pos_y < -1.25 || pos_y > 1.25 ) ||  // volume of the space the robot is within
+				 ( pos_z < 0 || pos_z > 1.75 ) )
 			{
 				valid_data = false;
 			}

@@ -1,5 +1,5 @@
 /*
-		Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
+	Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
 
     This file is part of cortex_bridge.
 
@@ -40,7 +40,7 @@
 #include <sstream>
 #include <time.h>
 
-// comment out this define to publish "cortex_bridge/Markers" instead of viz markers
+// toggle this define to publish "cortex_bridge/Markers" instead of viz markers
 #define PUBLISH_VISUALIZATION_MARKERS 1
 
 // Globals
@@ -54,20 +54,18 @@ float** bodyOriginOffset = NULL; // X, Y, Z, aX, aY, aZ W
 ros::Time glob;
 
 // call backs
-bool setOriginCallback ( cortex_bridge::cortexSetOrigin::Request& req,
-													cortex_bridge::cortexSetOrigin::Response& resp );
+bool setOriginCallback ( cortex_bridge::cortexSetOrigin::Request& req, cortex_bridge::cortexSetOrigin::Response& resp );
 void newFrameCallback ( sFrameOfData* FrameOfData );
 
 // main driver
 int main(int argc, char* argv[])
 {
-  // initialize ros / variables
-  ros::init(argc, argv, "cortex_bridge");
+	// initialize ros / variables
+	ros::init(argc, argv, "cortex_bridge");
 	ros::NodeHandle nh;
 	ros::ServiceServer service;
 	glob = ros::Time::now();
-	std::string myIP;
-	std::string cortexIP;
+	std::string myIP, cortexIP;
 
 	// Get IPs from param file
 	ros::NodeHandle param_nh("~");
@@ -90,10 +88,10 @@ int main(int argc, char* argv[])
 	service = nh.advertiseService("cortexSetOrigin", setOriginCallback);
 
 	// set loop rate
-  ros::Rate loop_rate(150);	
+	ros::Rate loop_rate(150);	
 
 	// Initialize cortex connection
-	if ( InitializeCortexConnection ( (char*)myIP.c_str(), (char*)cortexIP.c_str() ) != 0 )
+	if ( InitializeCortexConnection ( myIP.c_str(), cortexIP.c_str() ) != 0 )
 	{
 		ROS_INFO ( "Error: Unable to initialize ethernet communication" );
 		return -1;
@@ -129,8 +127,8 @@ int main(int argc, char* argv[])
 	ros::spin();
 
 	// clean up cortex connection
-  ROS_INFO ("Cortex_Exit");
-  Cortex_Exit();
+	ROS_INFO ("Cortex_Exit");
+	Cortex_Exit();
 
 	// clean up memory
 	for ( int i = 0; i < NumBodiesOfInterest; ++i )
@@ -141,14 +139,13 @@ int main(int argc, char* argv[])
 	delete bodyOfInterest;
 	delete bodyOriginOffset;
 
-  return 0;
+	return 0;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// ORIGIN SRV CALLBACK ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
-bool setOriginCallback ( cortex_bridge::cortexSetOrigin::Request& req,
-													cortex_bridge::cortexSetOrigin::Response& resp )
+bool setOriginCallback ( cortex_bridge::cortexSetOrigin::Request& req, cortex_bridge::cortexSetOrigin::Response& resp )
 {
 	ROS_INFO ( "Request to set origin for body: %s", req.subject_name.c_str() );
 	// initialize variables
@@ -159,7 +156,7 @@ bool setOriginCallback ( cortex_bridge::cortexSetOrigin::Request& req,
 	std::string bodyToSet;
 
 	// get body index
-	int bodyIndex = FindBodyIndex ( req.subject_name.c_str(), 																		NumBodiesOfInterest, bodyOfInterest );
+	int bodyIndex = FindBodyIndex ( req.subject_name.c_str(), NumBodiesOfInterest, bodyOfInterest );
 
 	// build name of tracked segment
 	if ( req.segment_name.empty() )
@@ -254,7 +251,7 @@ void newFrameCallback(sFrameOfData* FrameOfData)
 	}
 
 	// publish markers
-#ifdef PUBLISH_VISUALIZATION_MARKER
+#ifdef PUBLISH_VISUALIZATION_MARKERS
 	visualization_msgs::MarkerArray marker_array;
 	marker_array = CreateMarkerArray_vis ( FrameOfData );
 	Cortex_markers.publish(marker_array);

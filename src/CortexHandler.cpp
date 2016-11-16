@@ -26,7 +26,7 @@ int FindBodyFrameIndex ( sFrameOfData* FrameOfData, const char* body )
 	// initialize variables
 	int numBodies = FrameOfData->nBodies;
 	for ( int i = 0; i < numBodies; ++i )
-	{
+  {
 		if ( strcmp(body, FrameOfData->BodyData[i].szName) == 0 )
 			return i;
 	}
@@ -47,7 +47,6 @@ int FindBodyIndex ( const char* body, int num_bodies, char** bodies )
 int GetKnownBodies ( char** &bodies )
 {
   sBodyDefs* pBodyDefs = NULL;
-
   pBodyDefs = Cortex_GetBodyDefs();
 
   // No body definitions
@@ -102,8 +101,7 @@ void InitializeCortexHandlers()
 
   Cortex_SetVerbosityLevel(VL_Error);
   Cortex_GetSdkVersion(SDK_Version);
-  ROS_INFO ("Using SDK Version %d.%d.%d.%d", SDK_Version[0], SDK_Version[1], SDK_Version[2],
-         SDK_Version[3]);
+  ROS_INFO ("Using SDK Version %d.%d.%d.%d", SDK_Version[0], SDK_Version[1], SDK_Version[2], SDK_Version[3]);
 
   Cortex_SetErrorMsgHandlerFunc(MyErrorMsgHandler);
 }

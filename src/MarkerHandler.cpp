@@ -1,5 +1,5 @@
 /*
-		Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
+	Copyright 2015 Tyler Sorey, ARL, University of Nevada, Reno, USA
 
     This file is part of cortex_bridge.
 
@@ -163,7 +163,7 @@ cortex_bridge::Markers CreateMarkerArray_novis ( sFrameOfData* FrameOfData )
 
 			// is marker occluded?
 			marker_tmp.occluded = false; // for now assume if cameras can see it then we are 
-																	// not occluded...but look into this more later
+										 // not occluded...but look into this more later
 
 			// add marker to msg
 			markers_msg.markers.push_back ( marker_tmp );
@@ -186,7 +186,7 @@ cortex_bridge::Markers CreateMarkerArray_novis ( sFrameOfData* FrameOfData )
 
 		// is marker occluded?
 		marker_tmp.occluded = false; // for now assume if cameras can see it then we are 
-																	// not occluded...but look into this more later
+									 // not occluded...but look into this more later
 
 		// add marker to msg
 		markers_msg.markers.push_back ( marker_tmp );
