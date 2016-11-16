@@ -1,5 +1,5 @@
-# motion_analysis_bridge
-A Motion Analysis Bridge for ROS
+# cortex_ros_bridge
+A Motion Analysis Bridge to ROS
 
 **Compatibility:** Has been tested with Ubuntu 14.04, ROS Indigo, and Cortex 5.5.
 
@@ -36,9 +36,9 @@ Also, this should go without saying, but the computers should be able to see eac
 
 # Usage
 
-To run this package you will need to include two command line arguments. The first is the IP address of the linux machine (found by typing "ifconfig" into a terminal) and the second is the IP address of the machine running cortex (as entered in the NIC Address box of Cortex). So, the package can be run using:
+To run this package you will need to update the launch file to have your cortex pc and linux pc IP addresses. Then, the package can be run using:
 
-<pre><code>rosrun cortex_bridge cortex_bridge "xxx.xxx.xxx.xxx" "xxx.xxx.xxx.xxx"
+<pre><code>roslaunch cortex_bridge cortex_bridge.launch
 </code></pre>
 
 # Services and Topics
@@ -46,7 +46,7 @@ To run this package you will need to include two command line arguments. The fir
 There are at lease two topics exposed, there can be more if the user has decided to add multiple bodies of interest. They are shown below:
 
 	- Topic for each body, the bodyname itself will be the topic
-	- Topic for visualization markers OR non-visualization markers (can switch between them in the code by leaving or commenting out "#define PUBLISH_VISUALIZATION_MARKERS_TYLER 1"), topic will be either vis_markers or novis_markers
+	- Topic for visualization markers OR non-visualization markers (can switch between them in the code by leaving or commenting out "#define PUBLISH_VISUALIZATION_MARKERS 1"), topic will be either vis_markers or novis_markers
 
 The non visualization markers published will have the following structure:
 
@@ -65,7 +65,22 @@ There is a single service exposed that can be used to set the body's current pos
 
 	- cortexSetOrigin
 
+The service request has 4 parameters:
+
+	- subject_name
+		- the name of the body we want to set the origin of
+	- segment_name
+		- not currently implemented
+	- n_measurements
+		- number of measurements to take, the average becoming the offset
+	- z_offset
+		- a z offset of the origin (i.e. if you want the origin to be 1 m above it's current position, this value would be 1)
+
 # Future Updates/Bug Fixes
+
+	- Future update to make volume constraints (x, y, z) parameters in launch file instead of hard coded values.
+
+	- Add full support for segmented robots
 
 As bugs become known about every effort will be made to fix them. 
 
